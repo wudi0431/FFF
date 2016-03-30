@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>base_attr_test</title>
+    <script src="../src/lib/require.js"></script>
+    <script src="../src/yhd_mxc.js"></script>
+</head>
+<body>
+<div class="first"></div>
+<div class="testFlow"></div>
+<div class="last"></div>
+<div class="last1"></div>
+</body>
+<script>
+    require(['FFF', 'zepto'], function (FFF, $) {
+        var F = FFF.FFF;
+        var Widget = F.Widget;
+
+
+        //非同步UI
+        function Test() {
+            Widget.apply(this, arguments);
+        }
+
+        Test.ATTRS = {
+            testValue: {
+                value: 'test'
+            },
+            boundingBox: {
+                value: $('.last')
+            }
+        }
+
+        F.extend(Test, Widget, {
+            renderUI: function (obj) {
+                this.getBoundingBox().append($('<a></a>'));
+                alert('renderUI')
+            },
+            bindUI: function (obj) {
+                alert('bindUI');
+            },
+            syncUI: function (obj) {
+                alert('syncUI');
+            }
+        });
+
+        //测试
+        var test = new Test({testValue: 'test222', boundingBox: $('.last')});
+        // alert(test.getTestValue())
+        test.render();
+
+
+        //同步UI
+        function Test2() {
+            Widget.apply(this, arguments);
+        }
+
+        Test2.ATTRS = {
+            testValue: {
+                value: 'test'
+            },
+            boundingBox: {
+                value: $('.last1')
+            }
+        }
+
+        F.extend(Test2, Widget, {
+            renderUI: function (obj, next) {
+                this.getBoundingBox().append($('<a></a>'));
+                alert('renderUI')
+                next();
+            },
+            bindUI: function (obj, next) {
+                alert('bindUI');
+                next();
+            },
+            syncUI: function (obj) {
+                alert('syncUI');
+            }
+        });
+
+        //测试
+        var test2 = new Test({testValue: 'test222', boundingBox: $('.last1')});
+        test2.render({
+            async:false
+        });
+
+
+
+    })
+</script>
+</html>
