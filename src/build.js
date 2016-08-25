@@ -5,19 +5,19 @@
     //optimize:'none',
     modules: [{
         name: "FFF.min",
-        include: ["FFF","requirejs", "zepto", "base", "attribute", "language", "eventEmitter", "widget"]
+        include: ["requirejs", "zepto","FFF"]
     },{
         name: "FFF.fc.template.min",
-        include: ["FFF","requirejs", "zepto", "base", "attribute", "language", "eventEmitter", "widget","fastclick","template"]
+        include: ["requirejs", "zepto","FFF","fastclick","template"]
     },{
         name: "FFF.fc.template.bridge.min",
-        include: ["FFF","requirejs", "zepto", "base", "attribute", "language", "eventEmitter", "widget","fastclick","template","H5ToNative","bridge"]
+        include: ["requirejs", "zepto","FFF","fastclick","template","H5ToNative","bridge"]
     },{
         name: "FFF.fc.min",
-        include: ["FFF","requirejs", "zepto", "base", "attribute", "language", "eventEmitter", "widget","fastclick"]
+        include: ["requirejs", "zepto","FFF","fastclick"]
     },{
         name: "FFF.template.min",
-        include: ["FFF","requirejs", "zepto", "base", "attribute", "language", "eventEmitter", "widget","template"]
+        include: ["requirejs", "zepto","FFF","template"]
     }],
     paths: {
         requirejs: "./lib/require",

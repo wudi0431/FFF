@@ -3,21 +3,22 @@
     baseUrl:"./",
     dir: "../dist/jquery/v0.2",
     removeCombined:true,
+    //optimize:'none',
     modules: [{
         name: "FFF.min",
-        include: ["FFF","requirejs", "jquery", "base", "attribute", "language", "eventEmitter", "widget"]
+        include: ["requirejs", "jquery","FFF"]
     },{
         name: "FFF.fc.template.min",
-        include: ["FFF","requirejs", "jquery", "base", "attribute", "language", "eventEmitter", "widget","fastclick","template"]
+        include: ["requirejs", "jquery","FFF","fastclick","template"]
     },{
         name: "FFF.fc.template.bridge.min",
-        include: ["FFF","requirejs", "jquery", "base", "attribute", "language", "eventEmitter", "widget","fastclick","template","H5ToNative","bridge"]
+        include: ["requirejs", "jquery", "FFF","fastclick","template","H5ToNative","bridge"]
     },{
         name: "FFF.fc.min",
-        include: ["FFF","requirejs", "jquery", "base", "attribute", "language", "eventEmitter", "widget","fastclick"]
+        include: ["requirejs", "jquery", "FFF","fastclick"]
     },{
         name: "FFF.template.min",
-        include: ["FFF","requirejs", "jquery", "base", "attribute", "language", "eventEmitter", "widget","template"]
+        include: ["requirejs", "jquery","FFF","template"]
     }],
     paths: {
         requirejs: "./lib/require",
@@ -34,7 +35,16 @@
         H5ToNative:"./util/H5ToNative",
         bridge:"./util/bridge"
     },
+    shim: {
+        'jquery': {
+            exports: 'jquery'
+        }
+    },
     onBuildWrite: function( moduleName, path, contents) {
+        if(moduleName=='zepto') {
+            contents="";
+            return contents
+        }
             if(moduleName=='language'  || moduleName=='widget' || moduleName=='base'){
                 return contents.replace('zepto','jquery')
             }else{
