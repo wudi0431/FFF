@@ -45,10 +45,10 @@
             contents="";
             return contents
         }
-            if(moduleName=='language'  || moduleName=='widget' || moduleName=='base'){
-                return contents.replace('zepto','jquery')
-            }else{
-                return contents
-            }
+        if(moduleName=='language'  || moduleName=='widget' || moduleName=='base'){
+            return contents.replace('zepto','jquery')
+        }else{
+            return contents
+        }
     }
 });

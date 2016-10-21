@@ -46,9 +46,12 @@ define(['language', 'attribute', 'eventEmitter','zepto'], function(language, att
 
         Object.keys(that).forEach(function(key) {
             var value = that[key];
+            if(FFF.type(value)=='object'){
+                return ;
+            }
             if (value !== null && value!=undefined) {
                 //如果是zepto对象 移除事件并且删除dom
-                if ($ && value.off && value.off().remove) {
+                if ($ && value.off && value.off().remove ) {
                     value.off().remove();
                 }
                 //如果是dom节点 删除dom
@@ -77,6 +80,7 @@ define(['language', 'attribute', 'eventEmitter','zepto'], function(language, att
                 that[key] = null;
                 delete that[key];
             }
+
         });
 
         if (FFF) {
